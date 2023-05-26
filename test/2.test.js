@@ -32,7 +32,6 @@ test("POST /sign-up creates new user", async () => {
     headers["set-cookie"]?.startsWith("sid="),
     `Expected sign up to set cookie named 'sid', but set-cookie header was: ${headers["set-cookie"]}`
   );
-
   const sid = get_sid(headers);
   const session = getSession(sid);
   assert.ok(
