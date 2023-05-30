@@ -6,8 +6,7 @@ const { Layout } = require("../templates.js");
 const { getSession } = require("../model/session.js");
 
 function get(req, res) {
-  const sid = req.signedCookies.sid;
-  const session = getSession(sid);
+  const session = getSession(req.session);
   const current_user = session && session.user_id; // I found this line confusing!
   const page_owner = Number(req.params.user_id);
   if (current_user !== page_owner) {
@@ -50,8 +49,7 @@ function get(req, res) {
 }
 
 function post(req, res) {
-  const sid = req.signedCookies.sid;
-  const session = getSession(sid);
+  const session = getSession(req.session);
   const current_user = session && session.user_id;
   if (!req.body.content || !current_user) {
     return res.status(401).send("<h1>Confession failed</h1>");

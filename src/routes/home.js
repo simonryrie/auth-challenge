@@ -4,8 +4,7 @@ const { getSession } = require("../model/session.js")
 function get(req, res) {
   const title = "Confess your secrets!";
   let content = ""
-  const sid = req.signedCookies.sid;
-  const session = getSession(sid);
+  const session = getSession(req.session);
   if (session && session.user_id) {
     content = /*html*/ `
     <div class="Cover">
